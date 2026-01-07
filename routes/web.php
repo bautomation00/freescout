@@ -94,6 +94,7 @@ Route::get('/mailbox/oauth', ['uses' => 'MailboxesController@oauth'])->name('mai
 Route::get('/mailbox/oauth-disconnect/{id}/{in_out}/{provider}', ['uses' => 'MailboxesController@oauthDisconnect'])->name('mailboxes.oauth_disconnect');
 
 // Customers
+Route::get('/customers', 'CustomersController@index')->name('customers.index');
 Route::get('/customers/{id}/edit', 'CustomersController@update')->name('customers.update');
 Route::post('/customers/{id}/edit', 'CustomersController@updateSave');
 Route::get('/customers/{id}/', 'CustomersController@conversations')->name('customers.conversations');

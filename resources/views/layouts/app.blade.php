@@ -69,6 +69,7 @@
 
                     <div class="collapse navbar-collapse" id="app-navbar-collapse">
                         <ul class="nav navbar-nav">
+                            <li><a href="/customers" class="dropdown-toggle" role="button" aria-expanded="false" aria-haspopup="true" v-pre>Customers</a></li>
                             @php
                                 $mailboxes = Auth::user()->mailboxesCanView(true);
                                 $mailboxes = \Eventy::filter('menu.mailboxes', $mailboxes);

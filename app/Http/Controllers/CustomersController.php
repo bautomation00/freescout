@@ -497,6 +497,33 @@ class CustomersController extends Controller
         return view('customers/merge', ['customer' => $customer]);
     }
 
+    public function index(Request $request)
+    {
+        $query = Customer::query();
+
+        // Search
+        if ($search = $request->input('q')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('first_name', 'like', "%{$search}%")
+                  ->orWhere('last_name', 'like', "%{$search}%")
+                  ->orWhereHas('emails', function($qe) use ($search) {
+                      $qe->where('email', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        // Sort
+        $sort = $request->input('sort', 'id');
+        $direction = $request->input('direction', 'asc');
+
+        if (!in_array($sort, ['id', 'first_name', 'last_name'])) $sort = 'id';
+        if (!in_array($direction, ['asc','desc'])) $direction = 'asc';
+
+        $customers = $query->orderBy($sort, $direction)->paginate(20)->appends($request->query());
+
+        return view('customers.index', compact('customers', 'sort', 'direction', 'search'));
+    }
+    
     /**
      * Merge handling function.
      */
