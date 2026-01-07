@@ -91,11 +91,6 @@
 				</div>
 			@endif
 		@endforeach
-		@if (\App\Option::get('email_branding'))
-            <div height="" style="height:30px; font-size:12px; line-height:18px; font-family:Arial,'Helvetica Neue',Helvetica,Tahoma,sans-serif; color: #aaaaaa; @if($is_rtl) text-align: right; direction: rtl; unicode-bidi: plaintext; @endif">
-				{!! __('Support powered by :app_name — Free open source help desk & shared mailbox', ['app_name' => '<a href="https://landing.freescout.net">'.\Config::get('app.name').'</a>']) !!}
-			</div>
-		@endif
 	</div>
 </body>
 </html>
